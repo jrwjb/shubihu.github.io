@@ -86,22 +86,21 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>字典转dataframe<br>不定义列名时：pd.DataFrame.from_dict(data, orient=’index’)<br>定义列名时：pd.DataFrame.from_dict(data, orient=’index’, columns=[‘A’, ‘B’, ‘C’, ‘D’])<br>pandas筛选<br>选取某列值等于某些值的行用 == ，不等于用 ！= ，data.loc[data[‘a’] == ‘one’]<br>选取某列值是否是某一类型的数值用 isin ,取反用 <del>， data.loc[data[‘a’].isin([‘one’, ‘two’])]<br>data.loc[</del>data[‘a’].isin([‘one’, ‘two’])]<br>多种条件的选取用 &amp; , data.loc[(data[‘a’] == ‘one’) &amp; (data[‘b’] == ‘two’)]<br>np.linspace(start, stop, num) ##参数为起点，终点，点数，num默认为50<br>把某列值设为index，df.set_index(‘columns’)  (df.reset_index()重置索引)<br>df中merge函数按 键 合并，concat函数按 轴 合并</p>
-<p>按键 (key) 合并可以分「单键合并」和「多键合并」<br>单键合并：<br>pd.merge(df1, df2, how=s, on=c ) ##c 是 df1 和 df2 共有的一栏，合并方式 (how=s) 有四种：<br>左连接 (left)：合并之后显示 df1 的所有行<br>右连接 (right)：合并之后显示 df2 的所有行<br>外连接 (outer)：合并 df1 和 df2 共有的所有行<br>内连接 (inner)：只保留两个表中公共部分的信息 (默认情况)<br>多键合并(俩组数据均有该列)<br>pd.merge( df1, df2, how=s, on=c )  ## c 是多栏（如一个列表<br>多键合并(两组数据不同的列名）<br>pd.merge(df1, df2, left_on = ‘key1’, right_on = ‘key2’)</p>
-<p>插入列：除在最右侧插入用标签直接创建外，其他列用.insert()方法进行插入，比如table.insert(0,’date’,date)</p>
+        <p>#字典转dataframe<br>不定义列名时：pd.DataFrame.from_dict(data, orient=’index’)<br>定义列名时：pd.DataFrame.from_dict(data, orient=’index’, columns=[‘A’, ‘B’, ‘C’, ‘D’])<br>#pandas筛选<br>##选取某列值等于某些值的行用 == ，不等于用 ！= ，data.loc[data[‘a’] == ‘one’]<br>##选取某列值是否是某一类型的数值用 isin ,取反用 ~<br>data.loc[data[‘a’].isin([‘one’, ‘two’])]<br>data.loc[~data[‘a’].isin([‘one’, ‘two’])]<br>##多种条件的选取用 &amp; , data.loc[(data[‘a’] == ‘one’) &amp; (data[‘b’] == ‘two’)]<br>np.linspace(start, stop, num) ##参数为起点，终点，点数，num默认为50<br>#把某列值设为index，df.set_index(‘columns’)  (df.reset_index()重置索引)<br>df中merge函数按 键 合并，concat函数按 轴 合并</p>
+<p>#按键 (key) 合并可以分「单键合并」和「多键合并」<br>##单键合并：<br>pd.merge(df1, df2, how=s, on=c ) ##c 是 df1 和 df2 共有的一栏，合并方式 (how=s) 有四种：<br>##左连接 (left)：合并之后显示 df1 的所有行<br>##右连接 (right)：合并之后显示 df2 的所有行<br>##外连接 (outer)：合并 df1 和 df2 共有的所有行<br>##内连接 (inner)：只保留两个表中公共部分的信息 (默认情况)<br>##多键合并(俩组数据均有该列)<br>pd.merge( df1, df2, how=s, on=c )  ## c 是多栏（如一个列表<br>##多键合并(两组数据不同的列名）<br>pd.merge(df1, df2, left_on = ‘key1’, right_on = ‘key2’)</p>
+<p>##插入列：除在最右侧插入用标签直接创建外，其他列用.insert()方法进行插入，比如table.insert(0,’date’,date)</p>
 <p>当 df1 和 df2 有两个相同的列 (Asset 和 Instrument) 时，单单只对一列 (Asset) 做合并产出的 DataFrame 会有另一列 (Instrument) 重复的名称。<br>这时 merge 函数给重复的名称加个后缀 _x, _y，也可以设定 suffixes 来改后缀<br>pd.concat([df1,df2], axis=0, ignore_index=True)  # 默认axis=0（行连接）</p>
-<p>列索引 → 行索引，用 stack 函数;行索引 → 列索引，用 unstack 函数<br>数据透视：<br>用 pivot 函数将「一张长表」变「多张宽表」，<br>用 melt 函数将「多张宽表」变「一张长表」  # 函数 melt 实际是将「源表」转化成 id-variable 类型的 DataFrame<br>data_pivot = data.pivot(index=’Date’,columns=’Symbol’,values=’Adj Close’) #若不设置value参数，剩下的列都用来透视<br>melted_data = pd.melt(data, id_vars=[‘Date’,’Symbol’])</p>
+<p>#列索引 → 行索引，用 stack 函数;行索引 → 列索引，用 unstack 函数<br>#数据透视：<br>用 pivot 函数将「一张长表」变「多张宽表」，<br>用 melt 函数将「多张宽表」变「一张长表」  # 函数 melt 实际是将「源表」转化成 id-variable 类型的 DataFrame<br>data_pivot = data.pivot(index=’Date’,columns=’Symbol’,values=’Adj Close’) #若不设置value参数，剩下的列都用来透视<br>melted_data = pd.melt(data, id_vars=[‘Date’,’Symbol’])</p>
 <p>sorted(set(list), key=list.index)  ## 消除重复元素不改变原始数据顺序<br>sorted(dict.items(),key=lambda x:x[1],reverse=True)  ## 对字典按值反向排序（x[0]按键排序）</p>
-<p>#pandas 删除列<br>df = df.drop([‘c’, ‘e’], axis=1)<br>或者</p>
-<p>df.drop([‘c’, ‘e’], axis=1, inplace=True)</p>
+<p>#pandas 删除列<br>df = df.drop([‘c’, ‘e’], axis=1)<br>或者<br>df.drop([‘c’, ‘e’], axis=1, inplace=True)</p>
 <h1 id="对行-z-score-标准化"><a href="#对行-z-score-标准化" class="headerlink" title="对行 z-score 标准化"></a>对行 z-score 标准化</h1><p>df.apply(lambda x: (x - np.mean(x)) / (np.std(x,ddof=1)), axis=1)</p>
-<h1 id="对-Majority-protein-IDs-列转成多行"><a href="#对-Majority-protein-IDs-列转成多行" class="headerlink" title="对 Majority protein IDs 列转成多行"></a>对 Majority protein IDs 列转成多行</h1><p>df = df[~df[‘Majority protein IDs’].str.contains(‘CON|REV’, regex=True)]<br>df = df.drop(‘Majority protein IDs’, axis=1).join(df[‘Majority protein IDs’].str.split(‘;’, expand=True).stack().reset_index(level=1, drop=True).rename(‘Majority protein IDs’))</p>
+<p>#对 Majority protein IDs 列转成多行<br>df = df[~df[‘Majority protein IDs’].str.contains(‘CON|REV’, regex=True)]<br>df = df.drop(‘Majority protein IDs’, axis=1).join(df[‘Majority protein IDs’].str.split(‘;’, expand=True).stack().reset_index(level=1, drop=True).rename(‘Majority protein IDs’))</p>
 <p>def ab(df):<br>    return ‘;’.join(df.values)<br>newcolumns = df_merge.columns.tolist()<br>newcolumns.remove(‘Majority protein IDs’)<br>newdf = df_merge.groupby(newcolumns)[‘Majority protein IDs’].apply(ab)   ## 多行合并一行</p>
-<p>for、while循环中的else扩展用法<br>else中的程序只在一种条件下执行，即循环正常遍历所有内容或者由于条件不成立而结束循环，没有因break或者return而退出循环。continue对else没影响<br>for i in range(10):<br>    if i==5:<br>        break<br>    print(‘i=’,i,end=’,’)<br>else:<br>    print(‘success’)#不输出   在for循环中含有break时则直接终止循环，并不会执行else子句。</p>
+<p>#for、while循环中的else扩展用法<br>else中的程序只在一种条件下执行，即循环正常遍历所有内容或者由于条件不成立而结束循环，没有因break或者return而退出循环。continue对else没影响<br>for i in range(10):<br>    if i==5:<br>        break<br>    print(‘i=’,i,end=’,’)<br>else:<br>    print(‘success’)#不输出   在for循环中含有break时则直接终止循环，并不会执行else子句。</p>
 <p>for i in range(10):<br>    if i==5:<br>        continue<br>    print(‘i=’,i,end=’,’)<br>else:<br>    print(‘success’)#输出</p>
-<p>展平嵌套列表<br>newlist = [item for items in newlist for item in items]<br>或者您可以像这样从chain中使用itertools<br>from itertools import chain<br>newlist = list(chain(*newlist))<br>或者您可以使用chain.from_iterable，其中无需解压缩列表<br>from itertools import chain<br>newlist = list(chain.from_iterable(newlist))          ## 效率更高</p>
-<p>生成requirements.txt : pipreqs ./ –encoding=utf-8 –force</p>
-<p>单例<br>class Singleton(object):<br>    __instance = None</p>
+<p>#展平嵌套列表<br>newlist = [item for items in newlist for item in items]<br>或者您可以像这样从chain中使用itertools<br>from itertools import chain<br>newlist = list(chain(*newlist))<br>或者您可以使用chain.from_iterable，其中无需解压缩列表<br>from itertools import chain<br>newlist = list(chain.from_iterable(newlist))          ## 效率更高</p>
+<p>#生成requirements.txt : pipreqs ./ –encoding=utf-8 –force</p>
+<p>#单例<br>class Singleton(object):<br>    __instance = None</p>
 <pre><code>def __new__(cls, age, name):
     if not cls.__instance:
         cls.__instance = object.__new__(cls)
@@ -109,7 +108,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://jrwjb.github.io/shubihu.github.io/2021/02/02/Python/" data-id="ckknmc0dz0000hvsogtq60tpi" class="article-share-link">Share</a>
+      <a data-url="http://jrwjb.github.io/shubihu.github.io/2021/02/02/Python/" data-id="ckknmr02w0000j3soaxbl0gpm" class="article-share-link">Share</a>
       
       
     </footer>
@@ -158,7 +157,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://jrwjb.github.io/shubihu.github.io/2020/07/08/hello-world/" data-id="ckknloqn20000gcsog2ic47kc" class="article-share-link">Share</a>
+      <a data-url="http://jrwjb.github.io/shubihu.github.io/2020/07/08/hello-world/" data-id="ckknmr03k0001j3sobl1pghzw" class="article-share-link">Share</a>
       
       
     </footer>
