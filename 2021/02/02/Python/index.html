@@ -7,15 +7,15 @@
   
   <title>Python | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="#字典转dataframe不定义列名时：pd.DataFrame.from_dict(data, orient&#x3D;’index’)定义列名时：pd.DataFrame.from_dict(data, orient&#x3D;’index’, columns&#x3D;[‘A’, ‘B’, ‘C’, ‘D’])#pandas筛选##选取某列值等于某些值的行用 &#x3D;&#x3D; ，不等于用 ！&#x3D; ，data.loc[data[‘a’]">
+  <meta name="description" content="字典转dataframe不定义列名时：pd.DataFrame.from_dict(data, orient&#x3D;’index’)定义列名时：pd.DataFrame.from_dict(data, orient&#x3D;’index’, columns&#x3D;[‘A’, ‘B’, ‘C’, ‘D’])#pandas筛选##选取某列值等于某些值的行用 &#x3D;&#x3D; ，不等于用 ！&#x3D; ，data.loc[data[‘a’]">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Python">
 <meta property="og:url" content="http://jrwjb.github.io/shubihu.github.io/2021/02/02/Python/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="#字典转dataframe不定义列名时：pd.DataFrame.from_dict(data, orient&#x3D;’index’)定义列名时：pd.DataFrame.from_dict(data, orient&#x3D;’index’, columns&#x3D;[‘A’, ‘B’, ‘C’, ‘D’])#pandas筛选##选取某列值等于某些值的行用 &#x3D;&#x3D; ，不等于用 ！&#x3D; ，data.loc[data[‘a’]">
+<meta property="og:description" content="字典转dataframe不定义列名时：pd.DataFrame.from_dict(data, orient&#x3D;’index’)定义列名时：pd.DataFrame.from_dict(data, orient&#x3D;’index’, columns&#x3D;[‘A’, ‘B’, ‘C’, ‘D’])#pandas筛选##选取某列值等于某些值的行用 &#x3D;&#x3D; ，不等于用 ！&#x3D; ，data.loc[data[‘a’]">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2021-02-02T06:23:30.000Z">
-<meta property="article:modified_time" content="2021-02-02T06:36:43.091Z">
+<meta property="article:modified_time" content="2021-02-02T06:44:03.303Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary">
   
@@ -88,7 +88,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>#字典转dataframe<br>不定义列名时：pd.DataFrame.from_dict(data, orient=’index’)<br>定义列名时：pd.DataFrame.from_dict(data, orient=’index’, columns=[‘A’, ‘B’, ‘C’, ‘D’])<br>#pandas筛选<br>##选取某列值等于某些值的行用 == ，不等于用 ！= ，data.loc[data[‘a’] == ‘one’]<br>##选取某列值是否是某一类型的数值用 isin ,取反用 ~<br>data.loc[data[‘a’].isin([‘one’, ‘two’])]<br>data.loc[~data[‘a’].isin([‘one’, ‘two’])]<br>##多种条件的选取用 &amp; , data.loc[(data[‘a’] == ‘one’) &amp; (data[‘b’] == ‘two’)]<br>np.linspace(start, stop, num) ##参数为起点，终点，点数，num默认为50<br>#把某列值设为index，df.set_index(‘columns’)  (df.reset_index()重置索引)<br>df中merge函数按 键 合并，concat函数按 轴 合并</p>
+        <h1 id="字典转dataframe"><a href="#字典转dataframe" class="headerlink" title="字典转dataframe"></a>字典转dataframe</h1><p>不定义列名时：pd.DataFrame.from_dict(data, orient=’index’)<br>定义列名时：pd.DataFrame.from_dict(data, orient=’index’, columns=[‘A’, ‘B’, ‘C’, ‘D’])<br>#pandas筛选<br>##选取某列值等于某些值的行用 == ，不等于用 ！= ，data.loc[data[‘a’] == ‘one’]<br>##选取某列值是否是某一类型的数值用 isin ,取反用 ~<br>data.loc[data[‘a’].isin([‘one’, ‘two’])]<br>data.loc[~data[‘a’].isin([‘one’, ‘two’])]<br>##多种条件的选取用 &amp; , data.loc[(data[‘a’] == ‘one’) &amp; (data[‘b’] == ‘two’)]<br>np.linspace(start, stop, num) ##参数为起点，终点，点数，num默认为50<br>#把某列值设为index，df.set_index(‘columns’)  (df.reset_index()重置索引)<br>df中merge函数按 键 合并，concat函数按 轴 合并</p>
 <p>#按键 (key) 合并可以分「单键合并」和「多键合并」<br>##单键合并：<br>pd.merge(df1, df2, how=s, on=c ) ##c 是 df1 和 df2 共有的一栏，合并方式 (how=s) 有四种：<br>##左连接 (left)：合并之后显示 df1 的所有行<br>##右连接 (right)：合并之后显示 df2 的所有行<br>##外连接 (outer)：合并 df1 和 df2 共有的所有行<br>##内连接 (inner)：只保留两个表中公共部分的信息 (默认情况)<br>##多键合并(俩组数据均有该列)<br>pd.merge( df1, df2, how=s, on=c )  ## c 是多栏（如一个列表<br>##多键合并(两组数据不同的列名）<br>pd.merge(df1, df2, left_on = ‘key1’, right_on = ‘key2’)</p>
 <p>##插入列：除在最右侧插入用标签直接创建外，其他列用.insert()方法进行插入，比如table.insert(0,’date’,date)</p>
 <p>当 df1 和 df2 有两个相同的列 (Asset 和 Instrument) 时，单单只对一列 (Asset) 做合并产出的 DataFrame 会有另一列 (Instrument) 重复的名称。<br>这时 merge 函数给重复的名称加个后缀 _x, _y，也可以设定 suffixes 来改后缀<br>pd.concat([df1,df2], axis=0, ignore_index=True)  # 默认axis=0（行连接）</p>
@@ -110,7 +110,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://jrwjb.github.io/shubihu.github.io/2021/02/02/Python/" data-id="ckknmr02w0000j3soaxbl0gpm" class="article-share-link">Share</a>
+      <a data-url="http://jrwjb.github.io/shubihu.github.io/2021/02/02/Python/" data-id="ckknn0bb30001jxso25g11qqf" class="article-share-link">Share</a>
       
       
     </footer>
